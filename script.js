@@ -1,18 +1,24 @@
 
 function calculateTime() {
-    var currentDay = new Date;
-    var monday = currentDay.getDate() - currentDay.getDay()
-    var nextMonday = monday + 8;
-    var nextLesson = new Date;
-    nextLesson.setDate(nextMonday);
+    //Sunday fix (https://stackoverflow.com/questions/4156434/javascript-get-the-first-day-of-the-week-from-current-date)
+    var currentDay = new Date();
+    var day = currentDay.getDay() || 7; // Get current day number, converting Sun. to 7
+    if( day !== 1 )                     // Only manipulate the date if it isn't Mon.
+    
+    {
+        currentDay.setHours(-24 * (day - 1)); 
+    }                
+    var nextLesson = new Date();
+    nextLesson.setDate(nextLesson.getDate() + 1);
     nextLesson.setHours(11);
     nextLesson.setMinutes(0);
     nextLesson.setSeconds(0);
+
     
 
-    var currentDateTime = currentDay.getTime();
+    var today = (new Date).getTime();
     var deadline = nextLesson.getTime();
-    var remainingTime = deadline - currentDateTime;
+    var remainingTime = deadline - today;
     var days = Math.floor(remainingTime / (1000 * 60 * 60 *24));
     var hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
