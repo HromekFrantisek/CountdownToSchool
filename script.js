@@ -7,9 +7,10 @@ function calculateTime() {
     
     {
         currentDay.setHours(-24 * (day - 1)); 
-    }                
+    }    
+
     var nextLesson = new Date();
-    nextLesson.setDate(nextLesson.getDate() + 1);
+    nextLesson.setDate(nextLesson.getDate());
     nextLesson.setHours(11);
     nextLesson.setMinutes(0);
     nextLesson.setSeconds(0);
